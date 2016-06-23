@@ -1,5 +1,8 @@
 #!/usr/bin/python
 import optparse
+import logging
+import shlex
+import os
 
 OPTIONAL_DEFAULT_VAL="optional value"
 
@@ -29,13 +32,13 @@ def main():
         logging.basicConfig(filename=options.logfile,format='%(asctime)s %(levelname)s %(message)s',
                             level=logging.WARNING)
 
-  # Making sure all mandatory options appeared.
-  mandatories = ['mandoption']
-  for m in mandatories:
-    if not options.__dict__[m]:
-      print "mandatory option " + m + " is missing\n"
-      p.print_help()
-      exit(1)
+    # Making sure all mandatory options appeared.
+    mandatories = ['flag_variable']
+    for m in mandatories:
+        if not options.__dict__[m]:
+            print "mandatory option " + m + " is missing\n"
+            p.print_help()
+            exit(1)
 
 def do_cmd(cmd):
     args=shlex.split(cmd)
